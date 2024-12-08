@@ -12,15 +12,6 @@ import Assignments from "./src/components/Assignments";
 import Edit from "./src/components/Edit";
 import Toast from 'react-native-toast-message';
 
-const App = () => {
-  return (
-    <View style={{ flex: 1 }}>
-      <Edit />
-      <Toast ref={(ref) => Toast.setRef(ref)} />
-    </View>
-  );
-};
-
 const Stack = createStackNavigator();
 
 function App() {
@@ -45,6 +36,8 @@ function App() {
       </SafeAreaView>
     </SafeAreaProvider>    
   );
+  
 }
+
 
 export default App;
