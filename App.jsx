@@ -9,6 +9,17 @@ import SubjectForm from "./src/components/SubjectForm";
 import ScheduleForm from "./src/components/ScheduleForm";
 import Professors from "./src/components/Professors";
 import Assignments from "./src/components/Assignments";
+import Edit from "./src/components/Edit";
+import Toast from 'react-native-toast-message';
+
+const App = () => {
+  return (
+    <View style={{ flex: 1 }}>
+      <Edit />
+      <Toast ref={(ref) => Toast.setRef(ref)} />
+    </View>
+  );
+};
 
 const Stack = createStackNavigator();
 
@@ -18,7 +29,7 @@ function App() {
       <SafeAreaView style={{ flex: 1 }}>
         <NavigationContainer>
           <Stack.Navigator
-            initialRouteName="Login"
+            initialRouteName="Edit"
             screenOptions={{ headerShown: false }}
           >
             <Stack.Screen name ="Login" component= {Login}/>
@@ -28,6 +39,7 @@ function App() {
             <Stack.Screen name="ScheduleForm" component={ScheduleForm} />
             <Stack.Screen name="Professors" component={Professors} />
             <Stack.Screen name="Assignments" component={Assignments} />
+            <Stack.Screen name="Edit" component={Edit}/>
           </Stack.Navigator>
         </NavigationContainer>
       </SafeAreaView>
