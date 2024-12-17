@@ -22,7 +22,7 @@ function App() {
       <SafeAreaView style={{ flex: 1 }}>
         <NavigationContainer>
           <Stack.Navigator
-            initialRouteName="AuthScreen" // Configura AuthScreen como inicial si es necesario
+            initialRouteName="Login" // Configura AuthScreen como inicial si es necesario
             screenOptions={{ headerShown: false }}
           >
             <Stack.Screen name="AuthScreen" component={AuthScreen} />

@@ -21,12 +21,8 @@ export default function AuthScreen() {
     const navigation = useNavigation();
 
     const handleLogin = async () => {
-        if (!loginData.email || !loginData.password) {
-            Alert.alert("Error", "Por favor, completa todos los campos.");
-            return;
-        }
         try {
-            const response = await fetch("http://172.20.10.8:3000/login", {
+            const response = await fetch("http://172.100.93.52:3000/register", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(loginData),
@@ -34,7 +30,7 @@ export default function AuthScreen() {
             const data = await response.json();
             if (response.ok) {
                 Alert.alert("Éxito", "Inicio de sesión exitoso");
-                navigation.navigate("UserScreen"); // Navegar a otra pantalla después del login
+                navigation.navigate("UserScreen");
             } else {
                 Alert.alert("Error", data.message);
             }
@@ -42,6 +38,7 @@ export default function AuthScreen() {
             Alert.alert("Error", "No se pudo iniciar sesión");
         }
     };
+    
 
     const handleRegister = async () => {
         if (
@@ -53,7 +50,7 @@ export default function AuthScreen() {
             return;
         }
         try {
-            const response = await fetch("http://172.20.10.8:3000/register", {
+            const response = await fetch("http://172.100.93.52:3000/register", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(registerData),
