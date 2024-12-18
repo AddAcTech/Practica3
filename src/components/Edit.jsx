@@ -33,7 +33,7 @@ const Edit = () => {
 
   const updateName = async () => {
     try {
-      const response = await fetch("http://172.100.93.52:3000/username", {
+      const response = await fetch("http://172.100.77.25:3000/username", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -63,7 +63,7 @@ const Edit = () => {
 
   const updateEmail = async () => {
     try {
-      const response = await fetch("http://172.100.93.52:3000/email", {
+      const response = await fetch("http://172.100.77.25:3000/email", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -93,7 +93,7 @@ const Edit = () => {
         });
         return;
       }
-      const response = await fetch("http://172.100.93.52:3000/password", {
+      const response = await fetch("http://172.100.77.25:3000/password", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

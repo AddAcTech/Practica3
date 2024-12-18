@@ -14,7 +14,7 @@ function Login() {
       try {
         const localUser = JSON.parse(await AsyncStorage.getItem("user"));
         if (localUser) {
-          navigation.navigate("UserScreen");
+          navigation.navigate("Profile");
         }
       } catch (error) {
         Alert.alert("Error", "Error al cargar el perfil");
@@ -25,7 +25,7 @@ function Login() {
 
   const sendLogin = async () => {
     try {
-      const response = await fetch("http://172.100.93.52:3000/login", {
+      const response = await fetch("http://172.100.77.25:3000/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(user),
@@ -36,7 +36,7 @@ function Login() {
           await AsyncStorage.setItem("user", JSON.stringify(data.user));
         }
         Alert.alert("Éxito", data.message);
-        navigation.navigate("UserScreen");
+        navigation.navigate("Profile");
       } else {
         Alert.alert("Error", data.message);
       }

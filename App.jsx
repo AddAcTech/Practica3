@@ -13,6 +13,7 @@ import Assignments from "./src/components/Assignments";
 import Edit from "./src/components/Edit";
 import AuthScreen from "./src/components/AuthScreen"; // Importa AuthScreen
 import Toast from "react-native-toast-message";
+import Profile from "./src/components/Profile";
 
 const Stack = createStackNavigator();
 
@@ -27,6 +28,7 @@ function App() {
           >
             <Stack.Screen name="AuthScreen" component={AuthScreen} />
             <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="Profile" component={Profile} />
             <Stack.Screen name="UserScreen" component={UserScreen} />
             <Stack.Screen name="/" component={Principal} />
             <Stack.Screen name="SubjectForm" component={SubjectForm} />

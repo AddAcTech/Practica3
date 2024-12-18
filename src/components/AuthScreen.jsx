@@ -22,7 +22,7 @@ export default function AuthScreen() {
 
     const handleLogin = async () => {
         try {
-            const response = await fetch("http://172.100.93.52:3000/register", {
+            const response = await fetch("http://172.100.77.25:3000/register", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(loginData),
@@ -30,7 +30,7 @@ export default function AuthScreen() {
             const data = await response.json();
             if (response.ok) {
                 Alert.alert("Éxito", "Inicio de sesión exitoso");
-                navigation.navigate("UserScreen");
+                navigation.navigate("Profile");
             } else {
                 Alert.alert("Error", data.message);
             }
@@ -50,7 +50,7 @@ export default function AuthScreen() {
             return;
         }
         try {
-            const response = await fetch("http://172.100.93.52:3000/register", {
+            const response = await fetch("http://172.100.77.25:3000/register", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(registerData),

@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, Alert } from "react-native";
+import { View, Text, StyleSheet, Alert, TouchableOpacity } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation } from "@react-navigation/native"; // Importa el hook
 
-function UserScreen() {
+function Profile() {
   const [user, setUser] = useState(null);
+  const navigation = useNavigation(); // Obtiene el objeto navigation
 
   useEffect(() => {
     const fetchUserProfile = async () => {
@@ -35,6 +37,11 @@ function UserScreen() {
 
   return (
     <View style={styles.container}>
+      {/* Botón para volver atrás */}
+      <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+        <Text style={styles.backButtonText}>Volver</Text>
+      </TouchableOpacity>
+
       {user ? (
         <Text style={styles.text}>Bienvenido, {user.email}</Text>
       ) : (
@@ -47,6 +54,19 @@ function UserScreen() {
 const styles = StyleSheet.create({
   container: { flex: 1, justifyContent: "center", alignItems: "center" },
   text: { fontSize: 24, fontWeight: "bold" },
+  backButton: {
+    position: "absolute",
+    top: 50,
+    left: 20,
+    backgroundColor: "#ccc",
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderRadius: 5,
+  },
+  backButtonText: {
+    fontSize: 16,
+    color: "#000",
+  },
 });
 
-export default UserScreen;
+export default Profile;

@@ -47,5 +47,5 @@ app.post("/login", async (req, res) => {
 
 // Puerto del servidor
 app.listen(3000, () => {
-    console.log("Servidor corriendo en http://172.100.93.52:3000");
+    console.log("Servidor corriendo en http://172.100.77.25:3000");
 });
