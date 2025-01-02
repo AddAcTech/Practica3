@@ -1,37 +1,94 @@
 import { pool } from "../db.js";
 import bcrypt from "bcrypt";
 
-// Actualizar nombre de usuario
-export const updateUsername = async (req, res) => {
-  const { id, newUsername } = req.body;
-  console.log(req.body);
-
-  if (!id || !newUsername) {
-    return res
-      .status(400)
-      .json({ message: "Faltan campos requeridos (id, nombre de usuario)" });
-  }
+// Inicio de sesión
+export const login = async (req, res) => {
+  const { email, password } = req.body;
 
   try {
-    const user = await pool.query("SELECT * FROM users WHERE id = ?", [id]);
+    const [user] = await pool.query("SELECT * FROM users WHERE email = ?", [email]);
 
-    if (user.rowCount === 0) {
+    if (user.length === 0) {
       return res.status(404).json({ message: "Usuario no encontrado" });
     }
 
-    const usernameExists = await pool.query(
-      "SELECT * FROM users WHERE username = ?",
-      [newUsername]
-    );
+    const validPassword = await bcrypt.compare(password, user[0].user_password);
 
-    if (usernameExists.rowCount > 0) {
-      return res
-        .status(409)
-        .json({ message: "El nombre de usuario ya está en uso" });
+    if (!validPassword) {
+      return res.status(401).json({ message: "Contraseña incorrecta" });
     }
 
+    res.json({
+      message: "Inicio de sesión exitoso",
+      user: { id: user[0].id, username: user[0].username, email: user[0].email },
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error del servidor" });
+  }
+};
+
+// Registro de usuario
+export const register = async (req, res) => {
+  const { username, email, password } = req.body;
+
+  if (!username || !email || !password) {
+    return res.status(400).json({ message: "Todos los campos son obligatorios" });
+  }
+
+  try {
+    const [existingUser] = await pool.query("SELECT * FROM users WHERE email = ?", [email]);
+
+    if (existingUser.length > 0) {
+      return res.status(409).json({ message: "El correo ya está registrado" });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    await pool.query(
+      "INSERT INTO users (username, email, user_password) VALUES (?, ?, ?)",
+      [username, email, hashedPassword]
+    );
+
+    res.status(201).json({ message: "Usuario creado exitosamente" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error del servidor" });
+  }
+};
+
+// Obtener perfil del usuario
+export const getProfile = async (req, res) => {
+  const { email } = req.query;
+
+  if (!email) {
+    return res.status(400).json({ message: "El correo electrónico es obligatorio" });
+  }
+
+  try {
+    const [user] = await pool.query(
+      "SELECT id, username, email FROM users WHERE email = ?",
+      [email]
+    );
+
+    if (user.length === 0) {
+      return res.status(404).json({ message: "Usuario no encontrado" });
+    }
+
+    res.json({ user: user[0] });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error del servidor" });
+  }
+};
+
+// Actualizar nombre de usuario
+export const updateUsername = async (req, res) => {
+  try {
+    const { id, newUsername } = req.body;
+    console.log(req.body.username);
     await pool.query("UPDATE users SET username = ? WHERE id = ?", [
-      newUsername,
+      req.body.username,
       id,
     ]);
 

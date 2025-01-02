@@ -18,5 +18,5 @@ app.get('/test', async (req, res) => {
 
 // Puerto donde se ejecutará el servidor
 app.listen(3000, () => {
-    console.log('Servidor corriendo en http://172.100.77.25:3000');
+    console.log('Servidor corriendo en http://192.168.1.81:3000');
 });

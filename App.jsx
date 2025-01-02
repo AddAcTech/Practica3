@@ -23,18 +23,11 @@ function App() {
       <SafeAreaView style={{ flex: 1 }}>
         <NavigationContainer>
           <Stack.Navigator
-            initialRouteName="Login" // Configura AuthScreen como inicial si es necesario
+            initialRouteName="AuthScreen" // Configura AuthScreen como inicial si es necesario
             screenOptions={{ headerShown: false }}
           >
             <Stack.Screen name="AuthScreen" component={AuthScreen} />
-            <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="Profile" component={Profile} />
-            <Stack.Screen name="UserScreen" component={UserScreen} />
-            <Stack.Screen name="/" component={Principal} />
-            <Stack.Screen name="SubjectForm" component={SubjectForm} />
-            <Stack.Screen name="ScheduleForm" component={ScheduleForm} />
-            <Stack.Screen name="Professors" component={Professors} />
-            <Stack.Screen name="Assignments" component={Assignments} />
             <Stack.Screen name="Edit" component={Edit} />
           </Stack.Navigator>
         </NavigationContainer>

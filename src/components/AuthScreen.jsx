@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import {
     View,
@@ -22,7 +21,7 @@ export default function AuthScreen() {
 
     const handleLogin = async () => {
         try {
-            const response = await fetch("http://172.100.77.25:3000/register", {
+            const response = await fetch("http://192.168.1.81:3000/login", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(loginData),
@@ -50,7 +49,7 @@ export default function AuthScreen() {
             return;
         }
         try {
-            const response = await fetch("http://172.100.77.25:3000/register", {
+            const response = await fetch("http://192.168.1.81:3000/register", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(registerData),
